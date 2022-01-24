@@ -30,8 +30,9 @@ public class Categoryservice {
 	
 	@Transactional(readOnly = true)
 	public CategoryDTO findById(Long id) {
-		Optional<Category> object = categoryRepository.findById(id);		
-		return new CategoryDTO(object.get());
+		Optional<Category> object = categoryRepository.findById(id);
+		Category entity = object.orElseThrow(() -> new EntityNotFoundException("Entity not Found"));
+		return new CategoryDTO(entity);
 	}
 
 }
