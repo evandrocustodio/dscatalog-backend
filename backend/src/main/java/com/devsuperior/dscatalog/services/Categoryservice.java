@@ -9,6 +9,8 @@ import javax.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,6 +36,12 @@ public class Categoryservice {
 	}
 
 	@Transactional(readOnly = true)
+	public Page<CategoryDTO> findAllPaged(PageRequest pageRequest) {
+		Page<Category> categories = categoryRepository.findAll(pageRequest);
+		return categories.map(c -> new CategoryDTO(c));
+	}
+
+	@Transactional(readOnly = true)
 	public CategoryDTO findById(Long id) {
 		Optional<Category> object = categoryRepository.findById(id);
 		Category entity = object.orElseThrow(() -> new ResourceNotFoundException("Entity not Found"));
@@ -41,7 +49,7 @@ public class Categoryservice {
 	}
 
 	@Transactional
-	public CategoryDTO insert(CategoryDTO dto) {
+	public CategoryDTO insert(CategoryDTO dto) {	
 		Category entity = new Category();
 		entity.setName(dto.getName());
 		entity = categoryRepository.save(entity);
@@ -67,7 +75,7 @@ public class Categoryservice {
 		} catch (EmptyResultDataAccessException e) {
 			throw new ResourceNotFoundException("Id Not Found: " + id);
 		} catch (DataIntegrityViolationException e) {
-				throw new DatabaseException("Integrity Violation");
+			throw new DatabaseException("Integrity Violation");
 		}
 	}
 
