@@ -1,3 +1,3 @@
-INSERT INTO tb_category (id, name) VALUES (1, 'ELETRONICOS');
-INSERT INTO tb_category (id, name) VALUES (2, 'BRINQUEDOS');
-INSERT INTO tb_category (id, name) VALUES (3, 'ELETRODOMESTICOS');
+INSERT INTO tb_category (id, name, created_At ) VALUES (1, 'ELETRONICOS', NOW());
+INSERT INTO tb_category (id, name, created_At) VALUES (2, 'BRINQUEDOS', NOW());
+INSERT INTO tb_category (id, name, created_At) VALUES (3, 'ELETRODOMESTICOS', NOW());
