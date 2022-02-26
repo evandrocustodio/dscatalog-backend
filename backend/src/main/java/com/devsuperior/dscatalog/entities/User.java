@@ -7,6 +7,7 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -34,10 +35,10 @@ public class User implements Serializable{
 	@Column
 	private String password;
 	
-	@Column
+	@Column(unique = true)
 	private String email;
 	
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(
 			name = "tb_user_role", 
 			joinColumns = @JoinColumn(name = "user_id"), 
@@ -99,6 +100,7 @@ public class User implements Serializable{
 	public Set<Role> getRoles() {
 		return roles;
 	}
+	
 
 	@Override
 	public int hashCode() {
