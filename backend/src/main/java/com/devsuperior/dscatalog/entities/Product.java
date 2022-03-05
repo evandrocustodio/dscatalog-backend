@@ -15,6 +15,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.PastOrPresent;
+import javax.validation.constraints.Positive;
 
 @Entity
 @Table(name = "tb_product")
@@ -31,6 +34,7 @@ public class Product implements Serializable {
 
 	@Column(columnDefinition = "TEXT")
 	private String description;
+	
 	@Column
 	private Double price;
 
