@@ -22,6 +22,7 @@ import com.devsuperior.dscatalog.entities.RoleDTO;
 import com.devsuperior.dscatalog.entities.User;
 import com.devsuperior.dscatalog.entities.UserDTO;
 import com.devsuperior.dscatalog.entities.UserInsertDTO;
+import com.devsuperior.dscatalog.entities.UserUpdateDTO;
 import com.devsuperior.dscatalog.repositories.CategoryRepository;
 import com.devsuperior.dscatalog.repositories.RoleRepository;
 import com.devsuperior.dscatalog.repositories.UserRepository;
@@ -72,7 +73,7 @@ public class UserService {
 	}
 
 	@Transactional
-	public UserDTO update(Long id, UserDTO dto) {
+	public UserDTO update(Long id, UserUpdateDTO dto) {
 		User entity;
 		try {
 			entity = userRepository.getOne(id);
